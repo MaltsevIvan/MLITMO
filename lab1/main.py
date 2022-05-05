@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 from matplotlib.colors import ListedColormap
 from knn import KnnClassifier
+from sklearn.neighbors import KNeighborsClassifier
+
 cmap = ListedColormap([ '#00FF00', '#FF0000', '#0000FF'])
 
 def getDataset():
@@ -23,7 +25,7 @@ def getDataset():
 def LOO():
   test_score = []
   k = []
-  for i in range(3, 9, 2):
+  for i in range(3, 10, 2):
     print(i)
     clf = KnnClassifier(i)
     clf.fit(X_train.to_numpy(), y_train.to_numpy().flatten())
@@ -31,15 +33,20 @@ def LOO():
     test_score.append(np.sum(predictions == y_test.to_numpy().flatten()) / len(y_test.to_numpy().flatten()))
     k.append(i)
   return [k, test_score]
-  
+
+def sklearLinearReg(X_train, y_train, X_test, y_test):
+  neigh = KNeighborsClassifier(n_neighbors=3)
+  neigh.fit(X_train, y_train)
+  predictions = neigh.predict(X_test)
+  print('sklearn Err:', np.sum(predictions == y_test.to_numpy().flatten()) / len(y_test.to_numpy().flatten()))
 # TODO: recall and precision metrics
 
 data = getDataset()
 X = data[[i for i in range(10)]]
 y = data[[10]]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
-plt.plot(LOO())
-plt.show()
+print(LOO())
+# plt.plot(LOO())
+# plt.show()
 
-print(res)
-
+sklearLinearReg(X_train, y_train, X_test, y_test)
