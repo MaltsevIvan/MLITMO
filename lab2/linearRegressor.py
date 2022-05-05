@@ -1,7 +1,7 @@
 import numpy as np
 
 class linearRegressor:
-  def __init__(self, lr=0.001, n_iters=1000):
+  def __init__(self, lr=0.001, n_iters=50):
     self.lr = lr
     self.n_iters = n_iters
     self.weights = None
@@ -22,6 +22,12 @@ class linearRegressor:
       self.weights -= self.lr * dw
       self.bias -= self.lr * db
 
+      # print(self.weights)
+
   def predict(self, X): 
     y_approximated = np.dot(X, self.weights) + self.bias
     return y_approximated
+  
+  def getWeights(self):
+    print(self.weights)
+    return self.weights
