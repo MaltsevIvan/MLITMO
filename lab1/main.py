@@ -31,6 +31,8 @@ def LOO():
     test_score.append(np.sum(predictions == y_test.to_numpy().flatten()) / len(y_test.to_numpy().flatten()))
     k.append(i)
   return [k, test_score]
+  
+# TODO: recall and precision metrics
 
 data = getDataset()
 X = data[[i for i in range(10)]]

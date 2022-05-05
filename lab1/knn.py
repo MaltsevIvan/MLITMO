@@ -1,5 +1,6 @@
 import numpy as np
 from collections import Counter
+
 def euclidean_dist(x1, x2):
   return np.sqrt(np.sum(x1-x2)**2)
 
@@ -22,7 +23,7 @@ class KnnClassifier(KnnModel):
 
   def _predict(self, x):
     distances = [euclidean_dist(x, X_train) for X_train in self.X_train]
-    
+    # TODO: Kernal realization
     k_indixes = np.argsort(distances)[:self.k]
     k_nearest_lables  = [self.y_train[i] for i in k_indixes]
     most_common = Counter(k_nearest_lables).most_common(1)
