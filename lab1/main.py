@@ -39,14 +39,13 @@ def sklearLinearReg(X_train, y_train, X_test, y_test):
   neigh.fit(X_train, y_train)
   predictions = neigh.predict(X_test)
   print('sklearn Err:', np.sum(predictions == y_test.to_numpy().flatten()) / len(y_test.to_numpy().flatten()))
-# TODO: recall and precision metrics
 
 data = getDataset()
 X = data[[i for i in range(10)]]
 y = data[[10]]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
-print(LOO())
-# plt.plot(LOO())
-# plt.show()
 
-sklearLinearReg(X_train, y_train, X_test, y_test)
+clf = KnnClassifier(20)
+clf.fit(X_train.to_numpy(), y_train.to_numpy().flatten())
+
+clf.stolp(-0.4, 100)
