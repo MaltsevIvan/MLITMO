@@ -43,7 +43,7 @@ class KnnModel:
       self.y_train = np.delete(self.y_train, max_i)
       countDeleted = countDeleted + 1
 
-    # Get more standard values till threshold will be less than current count of margins 
+    # Get more standard values till threshold will be higher then current count of margins 
     print('standards', countDeleted)
     print(X_standards)
     n = len(self.y_train)
