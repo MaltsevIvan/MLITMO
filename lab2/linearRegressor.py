@@ -7,7 +7,7 @@ class linearRegressor:
     self.weights = None
     self.bias = None
   
-  def fit(self, X, y, lam):
+  def fit(self, X, y, lam=0):
     n_samples, n_features = X.shape
     X = np.concatenate((np.ones((n_samples, 1)), X), axis=1)
     self.weights = np.random.randn(n_features + 1, )
@@ -18,12 +18,8 @@ class linearRegressor:
       error = y_predicted - y
 
       # gradients
-      if (lam):
-        dw = (1/n_samples) * np.dot(X.T, (error)) + (lam * self.weights)
-        db = (1/n_samples) * np.sum(error) + (lam * self.weights)
-      else:
-        dw = (1/n_samples) * np.dot(X.T, (error))
-        db = (1/n_samples) * np.sum(error)
+      dw = (1/n_samples) * np.dot(X.T, (error)) + (lam * self.weights)
+      db = (1/n_samples) * np.sum(error) + (lam * self.weights)
       
       self.weights -= self.lr * dw
       self.bias -= self.lr * db
